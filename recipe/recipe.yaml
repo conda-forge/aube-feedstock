@@ -1,5 +1,5 @@
 context:
-  version: "1.32.0"
+  version: "1.33.0"
 
 package:
   name: aube
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/jdx/aube/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: b55b6bce1acdab8e2b42add8d5dfc0789e3b6adbb2c7b190470c663c23515da8
+  sha256: 6782179ab17e45622e96f26566a12ccf38b8a837752fb42b6010b0772b3fe404
 
 build:
   number: 0
