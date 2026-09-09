@@ -31,12 +31,11 @@ build:
         let schema = (
           open crates/aube-resolver/build.rs
           | parse --regex 'const PRIMER_DATA_SCHEMA: u32 = (?<schema>\d+);'
-          | get -i 0.schema
+          | get --optional 0.schema
         )
 
         if ($schema | is-empty) {
-          print "Failed to parse PRIMER_DATA_SCHEMA from crates/aube-resolver/build.rs"
-          exit 1
+          error make "Failed to parse PRIMER_DATA_SCHEMA from crates/aube-resolver/build.rs"
         }
 
         node ...[
