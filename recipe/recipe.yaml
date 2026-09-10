@@ -10,7 +10,7 @@ source:
   sha256: f01c1c13ed3107bbba8a834eb3bcb9574a6b812edfcb757e2799225e66c0faa3
 
 build:
-  number: 1
+  number: 2
   script:
     env:
       AUBE_PRIMER_TOP: "2000"
@@ -73,8 +73,6 @@ requirements:
     - nodejs
     - nushell
     - pkg-config
-  host:
-    - usage
 
 tests:
   - script:
