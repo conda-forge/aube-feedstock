@@ -29,7 +29,7 @@ build:
       # generate metadata primer, cf. https://github.com/aubepkg/aube/blob/main/.github/workflows/release.yml
       - |
         let schema = (
-          open crates/aube-resolver/build.rs
+          open --raw crates/aube-resolver/build.rs
           | parse --regex 'const PRIMER_DATA_SCHEMA: u32 = (?<schema>\d+);'
           | get --optional 0.schema
         )
@@ -45,14 +45,14 @@ build:
           --out=($"crates/aube-resolver/data/primer-top($env.AUBE_PRIMER_TOP)-v($env.AUBE_PRIMER_VERSION_CAP)-s($schema).rkyv.json")
           --popular-names-out=crates/aube-resolver/data/popular-top100000-v1.json
         ]
-      # build aube and generate license data
+      # build main app and generate license data
       - cd crates/aube
       - cargo auditable install --path=. --root=($prefix) --no-track --locked --bins --target=($env.CARGO_BUILD_TARGET)
       - cargo-bundle-licenses --format=yaml --output=../../THIRDPARTY.yml
       # generate shell completions
       - if: build_platform == host_platform
         then:
-          - mkdir $"($prefix)/share/bash-completion/completions" $"($prefix)/share/fish/vendor_completions.d" $"($prefix)/share/zsh/site-functions"
+          - mkdir ($prefix)/share/bash-completion/completions ($prefix)/share/fish/vendor_completions.d ($prefix)/share/zsh/site-functions
           - let bin = $prefix | path join bin/aube
           - ^$bin completion bash | save ($prefix | path join share/bash-completion/completions/aube)
           - ^$bin completion fish | save ($prefix | path join share/fish/vendor_completions.d/aube.fish)
