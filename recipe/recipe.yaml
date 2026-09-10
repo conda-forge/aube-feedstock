@@ -35,7 +35,7 @@ build:
         )
 
         if ($schema | is-empty) {
-          error make "Failed to parse PRIMER_DATA_SCHEMA from crates/aube-resolver/build.rs"
+          error make { msg: 'Failed to parse PRIMER_DATA_SCHEMA from crates/aube-resolver/build.rs' }
         }
 
         node ...[
